@@ -42,6 +42,7 @@ gname = "The Lost Island"
 ver = "0.1.3"
 info = cyan + "INFO: "
 end_count = "7"
+endings = pickle.load(open("DATA/save/end.dat", "rb"))
 player = "Marcus"
 endmes = f"End of {gname} beta :("
 unfound_file = None
@@ -190,10 +191,9 @@ while allow !=True:
                 overwrite = overwrite.lower()
                 if overwrite == "y":
                     cs()
-                    os.remove("DATA/save/save.dat")
-                    if os.path.exists("DATA/save/bag.dat"):
-                        os.remove("DATA/save/bag.dat")
-                    else: pass
+                    lvl = ""
+                    bag = []
+                    save()
                     lvl="prologue"
                     bag=[]
                     allow = True
