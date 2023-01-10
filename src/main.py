@@ -1,18 +1,33 @@
 # //Modules
 
-import os
-import pickle
-import time
-import winsound
-from pygame import mixer
-from sys import platform
-from colorama import init, Fore
+while True:
+    try:
+        import os
+        import pickle
+        import time
+        import winsound
+        from pygame import mixer
+        from sys import platform
+        from colorama import init, Fore
+        soundSys = True
+        break
+    except ModuleNotFoundError:
+        import os
+        import pickle
+        import time
+        from sys import platform
+        from colorama import init, Fore
+        soundSys = False
+
+        if platform == "win32":
+            input("Failed to import all libraries!\nThe game will now run without the sound systems: winsound & pygame.mixer\nPress enter to continue...")
+        break
 
 # //Config
 
-
-mixer.pre_init(44100, 16, 2, 4096)
-mixer.init()
+if soundSys:
+    mixer.pre_init(44100, 16, 2, 4096)
+    mixer.init()
 init(autoreset=True)
 lvl = 0
 red = Fore.RED
@@ -138,7 +153,7 @@ while allow !=True:
 ░░░██║░░░██╔══██║██╔══╝░░  ██║░░░░░██║░░██║░╚═══██╗░░░██║░░░  ██║░╚═══██╗██║░░░░░██╔══██║██║╚████║██║░░██║
 ░░░██║░░░██║░░██║███████╗  ███████╗╚█████╔╝██████╔╝░░░██║░░░  ██║██████╔╝███████╗██║░░██║██║░╚███║██████╔╝
 ░░░╚═╝░░░╚═╝░░╚═╝╚══════╝  ╚══════╝░╚════╝░╚═════╝░░░░╚═╝░░░  ╚═╝╚═════╝░╚══════╝╚═╝░░╚═╝╚═╝░░╚══╝╚═════╝░
-{ver}
+{ver} - {platform} Edition
 """)
 
     if os.path.exists("please.txt"):
@@ -560,7 +575,8 @@ ______________________________________
                 save()
 
                 if "Unknown Key" in bag:
-                    winsound.Beep(800, 1000)
+                    if soundSys:
+                        winsound.Beep(800, 1000)
                     cs()
                 else: cs()
         elif go == "3,5":
@@ -611,8 +627,9 @@ Why did you do all that?
 Soon I can meet you.
 Maybe you will remember what you did then...
 """)
-        mixer.music.load("DATA/save/snd/scream1.wav")
-        mixer.music.play()
+        if soundSys:
+            mixer.music.load("DATA/save/snd/scream1.wav")
+            mixer.music.play()
         time.sleep(16)
         cs()
         bag.remove("Shard")
