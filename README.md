@@ -1,1 +1,3 @@
 # TheLostIslandSource
+
+An old python game I made when I was younger...
