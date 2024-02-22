@@ -6,7 +6,6 @@ while True:
 		import pickle
 		import time
 		import winsound
-		from pygame import mixer
 		from sys import platform
 		from colorama import init, Fore
 		soundSys = True
@@ -25,9 +24,6 @@ while True:
 
 # //Config
 
-if soundSys:
-	mixer.pre_init(44100, 16, 2, 4096)
-	mixer.init()
 init(autoreset=True)
 lvl = 0
 red = Fore.RED
@@ -630,8 +626,7 @@ Soon I can meet you.
 Maybe you will remember what you did then...
 """)
 		if soundSys:
-			mixer.music.load("DATA/save/snd/scream1.wav")
-			mixer.music.play()
+			winsound.Beep(800, 1000)
 		time.sleep(16)
 		cs()
 		bag.remove("Shard")
